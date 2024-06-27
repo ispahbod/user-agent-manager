@@ -2,258 +2,294 @@
 
 namespace Ispahbod\UserAgentManager;
 
+use Random\RandomException;
+
 class UserAgentManager
 {
-    protected $userAgent;
+    protected string $userAgent;
 
-    public function __construct($userAgent)
+    public function __construct(string $userAgent)
     {
         $this->userAgent = $userAgent;
     }
 
-    public function isMobile()
+    public function isMobile(): bool
     {
         return preg_match('/Mobile|Android|BlackBerry|IEMobile|Silk/', $this->userAgent);
     }
 
-    public function isTablet()
+    public function isTablet(): bool
     {
         return preg_match('/Tablet|iPad/', $this->userAgent);
     }
 
-    public function isPC()
+    public function isPC(): bool
     {
         return !$this->isMobile() && !$this->isTablet();
     }
 
-    public function isAndroid()
+    public function isAndroid(): bool
     {
-        return preg_match('/Android/', $this->userAgent);
+        return str_contains($this->userAgent, "Android");
     }
 
-    public function isIOS()
+    public function isIOS(): bool
     {
         return preg_match('/iPhone|iPad|iPod/', $this->userAgent);
     }
 
-    public function isWindows()
+    public function isWindows(): bool
     {
-        return preg_match('/Windows/', $this->userAgent);
+        return str_contains($this->userAgent, "Windows");
     }
 
-    public function isMac()
+    public function isMac(): bool
     {
         return preg_match('/Macintosh|Mac OS X/', $this->userAgent);
     }
 
-    public function isLinux()
+    public function isLinux(): bool
     {
-        return preg_match('/Linux/', $this->userAgent);
+        return str_contains($this->userAgent, "Linux");
     }
 
-    public function isBot()
+    public function isBot(): bool
     {
         return preg_match('/bot|crawl|slurp|spider/i', $this->userAgent);
     }
 
-    public function isInternetExplorer()
+    public function isInternetExplorer(): bool
     {
         return preg_match('/MSIE|Trident/', $this->userAgent);
     }
 
-    public function isWeChat()
+    public function isWeChat(): bool
     {
-        return preg_match('/MicroMessenger/', $this->userAgent);
+        return str_contains($this->userAgent, "MicroMessenger");
     }
 
-    public function isFacebook()
+    public function isFacebook(): bool
     {
         return preg_match('/FBAV|FBAN/', $this->userAgent);
     }
 
-    public function isInstagram()
+    public function isInstagram(): bool
     {
-        return preg_match('/Instagram/', $this->userAgent);
+        return str_contains($this->userAgent, "Instagram");
     }
 
-    public function isTwitter()
+    public function isTwitter(): bool
     {
-        return preg_match('/Twitter/', $this->userAgent);
+        return str_contains($this->userAgent, "Twitter");
     }
 
-    public function isLinkedIn()
+    public function isLinkedIn(): bool
     {
-        return preg_match('/LinkedIn/', $this->userAgent);
+        return str_contains($this->userAgent, "LinkedIn");
     }
 
-    public function isPinterest()
+    public function isPinterest(): bool
     {
-        return preg_match('/Pinterest/', $this->userAgent);
+        return str_contains($this->userAgent, "Pinterest");
     }
 
-    public function isSnapchat()
+    public function isSnapchat(): bool
     {
-        return preg_match('/Snapchat/', $this->userAgent);
+        return str_contains($this->userAgent, "Snapchat");
     }
 
-    public function isTikTok()
+    public function isTikTok(): bool
     {
-        return preg_match('/TikTok/', $this->userAgent);
+        return str_contains($this->userAgent, "TikTok");
     }
 
-    public function isYouTube()
+    public function isYouTube(): bool
     {
-        return preg_match('/YouTube/', $this->userAgent);
+        return str_contains($this->userAgent, "YouTube");
     }
 
-    public function isVivaldi()
+    public function isVivaldi(): bool
     {
-        return preg_match('/Vivaldi/', $this->userAgent);
+        return str_contains($this->userAgent, "Vivaldi");
     }
 
-    public function isBrave()
+    public function isBrave(): bool
     {
-        return preg_match('/Brave/', $this->userAgent);
+        return str_contains($this->userAgent, "Brave");
     }
 
-    public function isDuckDuckGo()
+    public function isDuckDuckGo(): bool
     {
-        return preg_match('/DuckDuckGo/', $this->userAgent);
+        return str_contains($this->userAgent, "DuckDuckGo");
     }
 
-    public function isYandex()
+    public function isYandex(): bool
     {
-        return preg_match('/YaBrowser/', $this->userAgent);
+        return str_contains($this->userAgent, "YaBrowser");
     }
 
-    public function isSamsungBrowser()
+    public function isSamsungBrowser(): bool
     {
-        return preg_match('/SamsungBrowser/', $this->userAgent);
+        return str_contains($this->userAgent, "SamsungBrowser");
     }
 
-    public function isUC()
+    public function isUC(): bool
     {
-        return preg_match('/UCBrowser/', $this->userAgent);
+        return str_contains($this->userAgent, "UCBrowser");
     }
 
-    public function isQQ()
+    public function isQQ(): bool
     {
-        return preg_match('/QQBrowser/', $this->userAgent);
+        return str_contains($this->userAgent, "QQBrowser");
     }
 
-    public function isBaidu()
+    public function isBaidu(): bool
     {
-        return preg_match('/Baidu/', $this->userAgent);
+        return str_contains($this->userAgent, "Baidu");
     }
 
-    public function isOperaMini()
+    public function isOperaMini(): bool
     {
-        return preg_match('/Opera Mini/', $this->userAgent);
+        return str_contains($this->userAgent, 'Opera Mini');
     }
 
-    public function isOperaMobile()
+    public function isOperaMobile(): bool
     {
-        return preg_match('/Opera Mobi/', $this->userAgent);
+        return str_contains($this->userAgent, 'Opera Mobi');
     }
 
-    public function isSafari()
+    public function isSafari(): bool
     {
-        return preg_match('/Safari/', $this->userAgent) && !$this->isChrome();
+        return str_contains($this->userAgent, "Safari") && !$this->isChrome();
     }
 
-    public function isChrome()
+    public function isChrome(): bool
     {
-        return preg_match('/Chrome/', $this->userAgent);
+        return str_contains($this->userAgent, "Chrome");
     }
 
-    public function isFirefox()
+    public function isFirefox(): bool
     {
-        return preg_match('/Firefox/', $this->userAgent);
+        return str_contains($this->userAgent, "Firefox");
     }
 
-    public function isEdge()
+    public function isEdge(): bool
     {
-        return preg_match('/Edge/', $this->userAgent);
+        return str_contains($this->userAgent, "Edge");
     }
 
-    public function isOpera()
+    public function isOpera(): bool
     {
         return preg_match('/Opera|OPR/', $this->userAgent);
     }
 
-    public function getOperatingSystem()
+    public function getOperatingSystem(): string
     {
         if ($this->isWindows()) {
             return 'Windows';
-        } elseif ($this->isMac()) {
-            return 'Mac';
-        } elseif ($this->isAndroid()) {
-            return 'Android';
-        } elseif ($this->isIOS()) {
-            return 'iOS';
-        } elseif ($this->isLinux()) {
-            return 'Linux';
-        } else {
-            return 'Unknown';
         }
+
+        if ($this->isMac()) {
+            return 'Mac';
+        }
+
+        if ($this->isAndroid()) {
+            return 'Android';
+        }
+
+        if ($this->isIOS()) {
+            return 'iOS';
+        }
+
+        if ($this->isLinux()) {
+            return 'Linux';
+        }
+
+        return 'Unknown';
     }
 
-    public function getDevice()
+    public function getDevice(): string
     {
         if ($this->isMobile()) {
             return 'Mobile';
-        } elseif ($this->isTablet()) {
-            return 'Tablet';
-        } else {
-            return 'PC';
         }
+
+        if ($this->isTablet()) {
+            return 'Tablet';
+        }
+
+        return 'PC';
     }
 
-    public function getBrowser()
+    public function getBrowser(): string
     {
         if ($this->isChrome()) {
             return 'Chrome';
-        } elseif ($this->isSafari()) {
-            return 'Safari';
-        } elseif ($this->isFirefox()) {
-            return 'Firefox';
-        } elseif ($this->isEdge()) {
-            return 'Edge';
-        } elseif ($this->isOpera()) {
-            return 'Opera';
-        } elseif ($this->isVivaldi()) {
-            return 'Vivaldi';
-        } elseif ($this->isBrave()) {
-            return 'Brave';
-        } elseif ($this->isDuckDuckGo()) {
-            return 'DuckDuckGo';
-        } elseif ($this->isYandex()) {
-            return 'Yandex';
-        } elseif ($this->isSamsungBrowser()) {
-            return 'SamsungBrowser';
-        } elseif ($this->isUC()) {
-            return 'UCBrowser';
-        } elseif ($this->isQQ()) {
-            return 'QQBrowser';
-        } elseif ($this->isBaidu()) {
-            return 'Baidu';
-        } else {
-            return 'Unknown';
         }
+
+        if ($this->isSafari()) {
+            return 'Safari';
+        }
+
+        if ($this->isFirefox()) {
+            return 'Firefox';
+        }
+
+        if ($this->isEdge()) {
+            return 'Edge';
+        }
+
+        if ($this->isOpera()) {
+            return 'Opera';
+        }
+
+        if ($this->isVivaldi()) {
+            return 'Vivaldi';
+        }
+
+        if ($this->isBrave()) {
+            return 'Brave';
+        }
+
+        if ($this->isDuckDuckGo()) {
+            return 'DuckDuckGo';
+        }
+
+        if ($this->isYandex()) {
+            return 'Yandex';
+        }
+
+        if ($this->isSamsungBrowser()) {
+            return 'SamsungBrowser';
+        }
+
+        if ($this->isUC()) {
+            return 'UCBrowser';
+        }
+
+        if ($this->isQQ()) {
+            return 'QQBrowser';
+        }
+
+        if ($this->isBaidu()) {
+            return 'Baidu';
+        }
+
+        return 'Unknown';
     }
 
-    public function getBrowserVersion()
+    public function getBrowserVersion(): string
     {
         preg_match('/(Chrome|Firefox|Safari|Edge|Opera|OPR|Vivaldi|Brave|DuckDuckGo|YaBrowser|SamsungBrowser|UCBrowser|QQBrowser|Baidu)\/([0-9\.]+)/', $this->userAgent, $matches);
         return $matches[2] ?? 'Unknown';
     }
 
-    public function getUserAgent()
+    public function getUserAgent(): string
     {
         return $this->userAgent;
     }
 
-    public function getLanguage()
+    public function getLanguage(): string
     {
         preg_match('/\(([^)]+)\)/', $this->userAgent, $matches);
         if (isset($matches[1])) {
@@ -267,50 +303,69 @@ class UserAgentManager
         return 'Unknown';
     }
 
-    public function getPlatform()
+    public function getPlatform(): string
     {
         if ($this->isWindows()) {
             return 'Windows';
-        } elseif ($this->isMac()) {
-            return 'Mac';
-        } elseif ($this->isLinux()) {
-            return 'Linux';
-        } elseif ($this->isAndroid()) {
-            return 'Android';
-        } elseif ($this->isIOS()) {
-            return 'iOS';
-        } else {
-            return 'Unknown';
         }
+
+        if ($this->isMac()) {
+            return 'Mac';
+        }
+
+        if ($this->isLinux()) {
+            return 'Linux';
+        }
+
+        if ($this->isAndroid()) {
+            return 'Android';
+        }
+
+        if ($this->isIOS()) {
+            return 'iOS';
+        }
+
+        return 'Unknown';
     }
 
-    public function getDeviceType()
+    public function getDeviceType(): string
     {
         if ($this->isMobile()) {
             return 'Mobile';
-        } elseif ($this->isTablet()) {
-            return 'Tablet';
-        } else {
-            return 'Desktop';
         }
+
+        if ($this->isTablet()) {
+            return 'Tablet';
+        }
+
+        return 'Desktop';
     }
 
-    public function getBrowserEngine()
+    public function getBrowserEngine(): string
     {
         if ($this->isChrome() || $this->isOpera() || $this->isEdge() || $this->isBrave() || $this->isVivaldi()) {
             return 'Blink';
-        } elseif ($this->isFirefox()) {
-            return 'Gecko';
-        } elseif ($this->isSafari()) {
-            return 'WebKit';
-        } elseif ($this->isInternetExplorer()) {
-            return 'Trident';
-        } else {
-            return 'Unknown';
         }
+
+        if ($this->isFirefox()) {
+            return 'Gecko';
+        }
+
+        if ($this->isSafari()) {
+            return 'WebKit';
+        }
+
+        if ($this->isInternetExplorer()) {
+            return 'Trident';
+        }
+
+        return 'Unknown';
     }
 
-    public function generateWindowsUserAgent()
+    /**
+     * @throws RandomException
+     */
+    public static function generateWindowsUserAgent(): string
     {
         $windowsVersions = ['Windows NT 10.0', 'Windows NT 6.3', 'Windows NT 6.2', 'Windows NT 6.1', 'Windows NT 6.0', 'Windows NT 5.1'];
         $browsers = [
@@ -321,12 +376,15 @@ class UserAgentManager
 
         $windowsVersion = $windowsVersions[array_rand($windowsVersions)];
         $browser = array_rand($browsers);
-        $version = rand(60, 90) . '.0';
+        $version = random_int(60, 90) . '.0';
 
         return sprintf($browsers[$browser], $windowsVersion, $version, $version);
     }
 
-    public function generateMacUserAgent()
+    /**
+     * @throws RandomException
+     */
+    public  static function generateMacUserAgent(): string
     {
         $macVersions = ['Intel Mac OS X 10_15_7', 'Intel Mac OS X 10_14_6', 'Intel Mac OS X 10_13_6'];
         $browsers = [
@@ -337,12 +395,15 @@ class UserAgentManager
 
         $macVersion = $macVersions[array_rand($macVersions)];
         $browser = array_rand($browsers);
-        $version = rand(60, 90) . '.0';
+        $version = random_int(60, 90) . '.0';
 
         return sprintf($browsers[$browser], $macVersion, $version, $version);
     }
 
-    public function generateLinuxUserAgent()
+    /**
+     * @throws RandomException
+     */
+    public static function generateLinuxUserAgent(): string
     {
         $linuxDistributions = ['X11; Ubuntu; Linux x86_64', 'X11; Fedora; Linux x86_64', 'X11; Debian; Linux x86_64'];
         $browsers = [
@@ -352,12 +413,15 @@ class UserAgentManager
 
         $linuxDistribution = $linuxDistributions[array_rand($linuxDistributions)];
         $browser = array_rand($browsers);
-        $version = rand(60, 90) . '.0';
+        $version = random_int(60, 90) . '.0';
 
         return sprintf($browsers[$browser], $linuxDistribution, $version, $version);
     }
 
-    public function generateAndroidUserAgent()
+    /**
+     * @throws RandomException
+     */
+    public static function generateAndroidUserAgent(): string
     {
         $androidVersions = ['Android 10', 'Android 9', 'Android 8.1', 'Android 8.0', 'Android 7.1.1', 'Android 7.0'];
         $browsers = [
@@ -367,12 +431,15 @@ class UserAgentManager
 
         $androidVersion = $androidVersions[array_rand($androidVersions)];
         $browser = array_rand($browsers);
-        $version = rand(60, 90) . '.0';
+        $version = random_int(60, 90) . '.0';
 
         return sprintf($browsers[$browser], $androidVersion, $version, $version, $version);
     }
 
-    public function generateIOSUserAgent()
+    /**
+     * @throws RandomException
+     */
+    public static function generateIOSUserAgent(): string
     {
         $iosVersions = ['CPU iPhone OS 14_0 like Mac OS X', 'CPU iPhone OS 13_3 like Mac OS X', 'CPU iPhone OS 12_4 like Mac OS X'];
         $browsers = [
@@ -383,8 +450,58 @@ class UserAgentManager
 
         $iosVersion = $iosVersions[array_rand($iosVersions)];
         $browser = array_rand($browsers);
-        $version = rand(60, 90) . '.0';
+        $version = random_int(60, 90) . '.0';
 
         return sprintf($browsers[$browser], $iosVersion, $version, $version, $version);
+    }
+
+    public function isCrawler(): bool
+    {
+        return preg_match('/bot|crawl|slurp|spider|mediapartners/i', $this->userAgent);
+    }
+
+    public function isRealUser(): bool
+    {
+        return !$this->isCrawler() && !$this->isInvalidUserAgent();
+    }
+
+    public function isValidUserAgent(): bool
+    {
+        return preg_match('/Mozilla|Chrome|Safari|Opera|Firefox|Edge|MSIE|Trident/', $this->userAgent);
+    }
+
+    public function isInvalidUserAgent(): bool
+    {
+        return !$this->isValidUserAgent();
+    }
+
+    public function isSmartTV(): bool
+    {
+        return preg_match('/SmartTV|Tizen|Web0S|NetCast|HbbTV|Viera|Aquos|BRAVIA|CE-HTML|Opera TV|GoogleTV|DTV/i', $this->userAgent);
+    }
+
+    public function isConsole(): bool
+    {
+        return preg_match('/PlayStation|Xbox|Nintendo/i', $this->userAgent);
+    }
+
+    public function isWearable(): bool
+    {
+        return preg_match('/Watch|Wear|Glass/i', $this->userAgent);
+    }
+
+    public function isCarBrowser(): bool
+    {
+        return preg_match('/QtCarBrowser|Tesla/i', $this->userAgent);
+    }
+
+    public function isEReader(): bool
+    {
+        return preg_match('/Kindle|Silk|Kobo|Nook/i', $this->userAgent);
+    }
+
+    public function isDesktop(): bool
+    {
+        return !$this->isMobile() && !$this->isTablet() && !$this->isSmartTV() && !$this->isConsole() && !$this->isWearable() && !$this->isCarBrowser() && !$this->isEReader();
     }
 }
