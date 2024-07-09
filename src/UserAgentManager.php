@@ -504,4 +504,45 @@ class UserAgentManager
     {
         return !$this->isMobile() && !$this->isTablet() && !$this->isSmartTV() && !$this->isConsole() && !$this->isWearable() && !$this->isCarBrowser() && !$this->isEReader();
     }
+    public function isRealDevice(): bool
+    {
+        return $this->isRealUser() && ($this->isMobile() || $this->isTablet() || $this->isPC() || $this->isSmartTV() || $this->isConsole() || $this->isWearable() || $this->isCarBrowser() || $this->isEReader());
+    }
+
+    public function isAndroidVersionAbove(int $version): bool
+    {
+        if ($this->isAndroid()) {
+            preg_match('/Android (\d+)/', $this->userAgent, $matches);
+            if (isset($matches[1])) {
+                return (int)$matches[1] > $version;
+            }
+        }
+        return false;
+    }
+
+    public function isIOSVersionAbove(int $version): bool
+    {
+        if ($this->isIOS()) {
+            preg_match('/OS (\d+)_/', $this->userAgent, $matches);
+            if (isset($matches[1])) {
+                return (int)$matches[1] > $version;
+            }
+        }
+        return false;
+    }
+
+    public function isWindowsVersionAbove(int $version): bool
+    {
+        if ($this->isWindows()) {
+            preg_match('/Windows NT (\d+\.\d+)/', $this->userAgent, $matches);
+            if (isset($matches[1])) {
+                return (float)$matches[1] > $version;
+            }
+        }
+        return false;
+    }
+    public function isRealAndroidPhone(): bool
+    {
+        return $this->isAndroid() && $this->isRealDevice() && $this->isMobile();
+    }
 }
