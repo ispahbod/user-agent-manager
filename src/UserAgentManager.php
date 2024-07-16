@@ -23,7 +23,7 @@ class UserAgentManager
         return preg_match('/Tablet|iPad/', $this->userAgent);
     }
 
-    public function isPC(): bool
+    public function isDesktop(): bool
     {
         return !$this->isMobile() && !$this->isTablet();
     }
@@ -218,7 +218,7 @@ class UserAgentManager
             return 'Tablet';
         }
 
-        return 'PC';
+        return 'Desktop';
     }
 
     public function getBrowser(): string
@@ -506,7 +506,7 @@ class UserAgentManager
     }
     public function isRealDevice(): bool
     {
-        return $this->isRealUser() && ($this->isMobile() || $this->isTablet() || $this->isPC() || $this->isSmartTV() || $this->isConsole() || $this->isWearable() || $this->isCarBrowser() || $this->isEReader());
+        return $this->isRealUser() && ($this->isMobile() || $this->isTablet() || $this->isDesktop() || $this->isSmartTV() || $this->isConsole() || $this->isWearable() || $this->isCarBrowser() || $this->isEReader());
     }
 
     public function isAndroidVersionAbove(int $version): bool
