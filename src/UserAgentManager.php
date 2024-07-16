@@ -23,10 +23,6 @@ class UserAgentManager
         return preg_match('/Tablet|iPad/', $this->userAgent);
     }
 
-    public function isDesktop(): bool
-    {
-        return !$this->isMobile() && !$this->isTablet();
-    }
 
     public function isAndroid(): bool
     {
